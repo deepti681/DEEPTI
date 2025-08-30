@@ -1,0 +1,303 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Theme tokens */
+:root {
+  /* Base */
+  --background: #0f172a; 
+  --foreground: #f1f5f9; 
+
+  /* Surfaces */
+  --card: var(--background);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+
+  /* Brand */
+  --primary: #6366f1; 
+  --primary-foreground: var(--foreground);
+  --secondary: #06b6d4; 
+  --secondary-foreground: var(--foreground);
+  --accent: var(--secondary);
+  --accent-foreground: var(--foreground);
+
+  /* Support */
+  --muted: rgba(241, 245, 249, 0.06); 
+  --muted-foreground: rgba(241, 245, 249, 0.7);
+  --destructive: var(--primary); 
+  --destructive-foreground: var(--foreground);
+
+  /* UI chrome */
+  --border: rgba(241, 245, 249, 0.12); /* subtle border from text */
+  --input: var(--border);
+  --ring: rgba(99, 102, 241, 0.35); /* primary tint */
+
+  /* Charts (kept within primary/secondary range) */
+  --chart-1: var(--primary);
+  --chart-2: var(--secondary);
+  --chart-3: color-mix(in oklab, var(--primary) 75%, var(--secondary));
+  --chart-4: color-mix(in oklab, var(--secondary) 75%, var(--primary));
+  --chart-5: color-mix(in oklab, var(--primary) 55%, var(--background));
+
+  --radius: 0.625rem;
+
+  /* Sidebar tokens mapped to base tokens for consistency */
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--foreground);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+/* Keep dark mode identical for a unified look */
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+
+  --card: var(--background);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+
+  --primary: #6366f1;
+  --primary-foreground: var(--foreground);
+  --secondary: #06b6d4;
+  --secondary-foreground: var(--foreground);
+  --accent: var(--secondary);
+  --accent-foreground: var(--foreground);
+
+  --muted: rgba(241, 245, 249, 0.06);
+  --muted-foreground: rgba(241, 245, 249, 0.7);
+  --destructive: var(--primary);
+  --destructive-foreground: var(--foreground);
+
+  --border: rgba(241, 245, 249, 0.12);
+  --input: var(--border);
+  --ring: rgba(99, 102, 241, 0.35);
+
+  --chart-1: var(--primary);
+  --chart-2: var(--secondary);
+  --chart-3: color-mix(in oklab, var(--primary) 75%, var(--secondary));
+  --chart-4: color-mix(in oklab, var(--secondary) 75%, var(--primary));
+  --chart-5: color-mix(in oklab, var(--primary) 55%, var(--background));
+
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--foreground);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+@theme inline {
+  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Ensure headings inherit Soft White for consistent contrast */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--foreground);
+  }
+
+  /* Normalize link colors and hover states */
+  a {
+    color: var(--secondary);
+    text-decoration-color: rgba(6, 182, 212, 0.35); /* secondary tint */
+    text-underline-offset: 3px;
+  }
+  a:hover {
+    color: var(--primary);
+    text-decoration-color: rgba(99, 102, 241, 0.45); /* primary tint */
+  }
+
+  /* Normalize native and common button selectors */
+  button,
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  .btn {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    border-radius: var(--radius-md);
+    transition: box-shadow 150ms ease, transform 150ms ease, background-color 150ms ease;
+  }
+  button:hover,
+  [type="button"]:hover,
+  [type="submit"]:hover,
+  [type="reset"]:hover,
+  .btn:hover {
+    background-color: var(--primary);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+    transform: translateY(-1px);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Professional gradient/text accents using primary/secondary */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.bg-gradient-primary,
+.gradient-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+/* Card/Skill hover interactions */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+}
+.skill-card {
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
+}
+.skill-card:hover {
+  transform: translateY(-10px) rotate(1.5deg);
+  box-shadow: 0 20px 40px -8px rgba(99, 102, 241, 0.25);
+}
+
+.bg-white {
+  background-color: var(--background) !important;
+}
+.dark .bg-gray-900 {
+  background-color: var(--background) !important;
+}
+.dark .bg-gray-800 {
+  background-color: var(--card) !important;
+}
+.bg-gray-50 {
+  background-color: var(--background) !important;
+}
+
+/* Text colors commonly used */
+.text-gray-900,
+.text-gray-800,
+.dark .text-white {
+  color: var(--foreground) !important;
+}
+.text-gray-600,
+.dark .text-gray-400,
+.text-gray-400 {
+  color: var(--muted-foreground) !important;
+}
+
+/* Borders commonly used */
+.border-gray-200,
+.dark .border-gray-700 {
+  border-color: var(--border) !important;
+}
+
+/* Footer/controls hover backgrounds */
+.hover\:bg-gray-700:hover {
+  background-color: var(--card) !important;
+}
+
+/* Map legacy orange/amber/yellow accents to brand primary/secondary */
+.text-orange-500 {
+  color: var(--primary) !important;
+}
+.hover\:text-orange-500:hover {
+  color: var(--primary) !important;
+}
+.border-orange-500 {
+  border-color: var(--primary) !important;
+}
+.bg-orange-500 {
+  background-color: var(--primary) !important;
+}
+.hover\:bg-orange-500:hover,
+.hover\:bg-orange-600:hover {
+  background-color: var(--primary) !important;
+}
+
+.text-amber-700 {
+  color: var(--secondary) !important;
+}
+.border-amber-200 {
+  border-color: var(--border) !important;
+}
+.bg-yellow-50 {
+  background-color: var(--background) !important;
+}
+
+/* Links previously blue -> use secondary accent on hover */
+.hover\:text-blue-400:hover {
+  color: var(--secondary) !important;
+}
+
+/* Hero gradient flattening to theme background */
+.from-gray-50 {
+  --tw-gradient-from: var(--background) !important;
+}
+.to-orange-50 {
+  --tw-gradient-to: var(--background) !important;
+}
+.dark .from-gray-900 {
+  --tw-gradient-from: var(--background) !important;
+}
+.dark .to-gray-800 {
+  --tw-gradient-to: var(--background) !important;
+}
