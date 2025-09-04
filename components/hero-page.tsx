@@ -76,7 +76,7 @@ const HeroPage = () => {
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full blur-2xl opacity-20 animate-pulse"></div>
             <Image
-              src="/logo.jpeg"
+              src="/female-developer-headshot.png"
               alt="Deepti Pahuja - Frontend Developer"
               width={320}
               height={320}

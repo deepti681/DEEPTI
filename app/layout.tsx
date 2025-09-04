@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Deepti Pahuja | Frontend Developer",
   description:
     "Portfolio of Deepti Pahuja, a passionate Frontend Developer specializing in creating modern, responsive, and user-friendly web applications.",
-  generator: "v0.app",
+  generator: "Next.js",
 }
 
 export default function RootLayout({

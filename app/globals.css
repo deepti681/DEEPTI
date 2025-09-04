@@ -95,7 +95,7 @@
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -142,7 +142,7 @@
     @apply bg-background text-foreground;
   }
 
-  /* Ensure headings inherit Soft White for consistent contrast */
+  
   h1,
   h2,
   h3,
